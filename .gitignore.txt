@@ -1,0 +1,12 @@
+# Ignorer uniquement le contenu du répertoire data, mais pas le répertoire lui-même
+data/*
+
+# Ignorer les fichiers dans les sous-répertoires de data
+data/**/*
+
+# Vous pouvez également ignorer d'autres fichiers ou répertoires courants
+# par exemple :
+# __pycache__/
+# *.pyc
+# .env
+# .DS_Store
