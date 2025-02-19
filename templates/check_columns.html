@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Colonnes de la Table Transactions{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Colonnes de la Table Transactions</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom de la Colonne</th>
+                <th>Type</th>
+                <th>Null</th>
+                <th>Clé Primaire</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for col in columns %}
+            <tr>
+                <td>{{ col[0] }}</td>
+                <td>{{ col[1] }}</td>
+                <td>{{ col[2] }}</td>
+                <td>{{ col[3] }}</td>
+                <td>{{ col[5] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        <a class="btn btn-primary" href="{{ url_for('index') }}">Retour à l'accueil</a>
+    </div>
+{% endblock %}

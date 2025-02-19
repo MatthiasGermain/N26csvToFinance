@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto p-6">
+        <h1 class="text-center text-3xl font-semibold mb-6">Analyse des relevés bancaires</h1>
+        <div class="flex flex-wrap justify-center gap-6">
+            <a href="{{ url_for('analyse_partner') }}" class="btn btn-warning">Analyse par Partner Name</a>
+            <a href="{{ url_for('show_transactions') }}" class="btn btn-info">Voir les Transactions</a>
+            <a href="{{ url_for('check_columns') }}" class="btn btn-dark">Vérifier les Colonnes</a>
+            <a href="{{ url_for('manage_categories') }}" class="btn btn-primary">Gérer les Catégories</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Analyse par Partner Name{% endblock %}
+
+{% block content %}
+   <h1 class="text-center text-3xl font-bold mb-4">Analyse par Partner Name</h1>
+
+   <!-- Tableau d'analyse -->
+   <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+       <thead>
+           <tr class="bg-gray-200">
+               <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Partner Name</th>
+               <th class="px-6 py-3 text-left text-sm font-medium text-gray-700">Total</th>
+           </tr>
+       </thead>
+       <tbody>
+           {% for entry in data %}
+           <tr class="border-b border-gray-200">
+               <td class="px-6 py-4 text-sm text-gray-700">{{ entry['partner_name'] }}</td>
+               <td class="px-6 py-4 text-sm text-gray-700">{{ entry['total'] }}</td>
+           </tr>
+           {% endfor %}
+       </tbody>
+   </table>
+
+   <!-- Bouton de retour -->
+   <div class="text-center mt-6">
+       <a href="{{ url_for('index') }}" class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition duration-200">Retour à l'accueil</a>
+   </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Analyse Bancaire{% endblock %}</title>
+    <!-- Intégration de Tailwind CSS via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Intégration de Font Awesome pour les icônes -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+
+    <!-- Barre de navigation -->
+    <nav class="bg-blue-600 p-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Titre de l'application -->
+            <a href="{{ url_for('index') }}" class="text-white text-2xl font-semibold hover:text-gray-300 transition duration-200">Analyse Bancaire</a>
+
+            <!-- Liens de navigation -->
+            <ul class="flex space-x-6">
+                <li>
+                    <a href="{{ url_for('analyse_partner') }}" class="text-white hover:text-yellow-300 transition duration-200 p-2 rounded-md">Par Partner Name</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('show_transactions') }}" class="text-white hover:text-yellow-300 transition duration-200 p-2 rounded-md">Transactions</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('check_columns') }}" class="text-white hover:text-yellow-300 transition duration-200 p-2 rounded-md">Vérification des Colonnes</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('manage_categories') }}" class="text-white hover:text-yellow-300 transition duration-200 p-2 rounded-md">Gérer les Catégories</a>
+                </li>
+            </ul>
+
+            <!-- Bouton Import Data avec l'icône de flèche vers le haut -->
+            <ul class="flex space-x-6">
+                <li>
+                    <a href="{{ url_for('import_data') }}" class="text-white hover:text-yellow-300 transition duration-200 p-2 rounded-md flex items-center space-x-2 ml-auto">
+                        <span>Importer</span>
+                        <i class="fas fa-arrow-up"></i> <!-- Flèche vers le haut -->
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <div class="container mx-auto p-6">
+        {% block content %}
+        <!-- Le contenu spécifique à chaque page sera inséré ici -->
+        {% endblock %}
+    </div>
+
+</body>
+</html>

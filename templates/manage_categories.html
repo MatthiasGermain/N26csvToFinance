@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Gérer les Catégories{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto p-6">
+        <h1 class="text-center text-4xl font-semibold text-blue-600 mb-6">Gérer les Catégories</h1>
+
+        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Partenaires Classés</h2>
+            <form id="classifiedForm" method="POST">
+                {% for partner, category in categories.items() if category != "None" %}
+                    <div class="mb-4 flex items-center justify-between">
+                        <label class="text-gray-700 text-sm font-bold mb-2" for="{{ partner }}">{{ partner }}:</label>
+                        <input type="text" id="{{ partner }}" name="{{ partner }}" value="{{ category }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                {% endfor %}
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Partenaires Non Classés</h2>
+            <form id="unclassifiedForm" method="POST">
+                {% for partner in unclassified_partners %}
+                    <div class="mb-4 flex items-center justify-between">
+                        <label class="text-gray-700 text-sm font-bold mb-2" for="{{ partner }}">{{ partner }}:</label>
+                        <select name="{{ partner }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="">Sélectionner une catégorie</option>
+                            <option value="Abonnements & Dons">Abonnements & Dons</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Assurances & Finances">Assurances & Finances</option>
+                            <option value="Autres">Autres</option>
+                            <option value="Bars et restaurants">Bars et restaurants</option>
+                            <option value="CASH26">CASH26</option>
+                            <option value="Distributeur automatique">Distributeur automatique</option>
+                            <option value="Dépenses professionnelles">Dépenses professionnelles</option>
+                            <option value="Éducation">Éducation</option>
+                            <option value="Épargne & Investissement">Épargne & Investissement</option>
+                            <option value="Espaces">Espaces</option>
+                            <option value="Famille & Amis">Famille & Amis</option>
+                            <option value="Taxes et amendes">Taxes et amendes</option>
+                            <option value="Invitation à N26">Invitation à N26</option>
+                            <option value="Loisirs & Divertissements">Loisirs & Divertissements</option>
+                            <option value="Logement & Services publics">Logement & Services publics</option>
+                            <option value="Multimédia & Électronique">Multimédia & Électronique</option>
+                            <option value="Courses & Alimentation">Courses & Alimentation</option>
+                            <option value="Revenus">Revenus</option>
+                            <option value="Salaire">Salaire</option>
+                            <option value="Santé et pharmacie">Santé et pharmacie</option>
+                            <option value="Transport & Voiture">Transport & Voiture</option>
+                            <option value="Voyages & Vacances">Voyages & Vacances</option>
+                        </select>
+                    </div>
+                {% endfor %}
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+
+        <a href="{{ url_for('index') }}" class="mt-4 inline-block text-blue-500 underline">Retour à l'accueil</a>
+    </div>
+
+    <script>
+        document.getElementById('classifiedForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch(this.action, {
+                method: this.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                }
+            });
+        });
+
+        document.getElementById('unclassifiedForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch(this.action, {
+                method: this.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                }
+            });
+        });
+    </script>
+{% endblock %}

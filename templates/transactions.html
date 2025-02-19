@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Transactions{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto p-6">
+        <h1 class="text-center text-4xl font-semibold text-blue-600 mb-6">Liste des Transactions</h1>
+
+        <div class="mb-4 text-center">
+            <button id="toggleViewBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Vue Simplifiée
+            </button>
+        </div>
+
+        <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+            <table id="transactionsTable" class="min-w-full table-auto">
+                <thead id="tableHead" class="bg-blue-500 text-white">
+                    <tr>
+                        <th class="px-4 py-2 text-left">ID</th>
+                        <th class="px-4 py-2 text-left">Date de réservation</th>
+                        <th class="px-4 py-2 text-left">Date de valeur</th>
+                        <th class="px-4 py-2 text-left">Nom du partenaire</th>
+                        <th class="px-4 py-2 text-left">IBAN du partenaire</th>
+                        <th class="px-4 py-2 text-left">Type</th>
+                        <th class="px-4 py-2 text-left">Référence de paiement</th>
+                        <th class="px-4 py-2 text-left">Nom du compte</th>
+                        <th class="px-4 py-2 text-left">Montant</th>
+                        <th class="px-4 py-2 text-left">Montant original</th>
+                        <th class="px-4 py-2 text-left">Devise originale</th>
+                        <th class="px-4 py-2 text-left">Taux de change</th>
+                        <th class="px-4 py-2 text-left">Catégorie</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    {% for transaction in transactions %}
+                    <tr class="hover:bg-gray-100 border-t">
+                        <td class="px-4 py-2">{{ transaction[0] }}</td>
+                        <td class="px-4 py-2">{{ transaction[1] }}</td>
+                        <td class="px-4 py-2">{{ transaction[2] }}</td>
+                        <td class="px-4 py-2">{{ transaction[3] }}</td>
+                        <td class="px-4 py-2">{{ transaction[4] }}</td>
+                        <td class="px-4 py-2">{{ transaction[5] }}</td>
+                        <td class="px-4 py-2">{{ transaction[6] }}</td>
+                        <td class="px-4 py-2">{{ transaction[7] }}</td>
+                        <td class="px-4 py-2">{{ transaction[8] }}</td>
+                        <td class="px-4 py-2">{{ transaction[9] }}</td>
+                        <td class="px-4 py-2">{{ transaction[10] }}</td>
+                        <td class="px-4 py-2">{{ transaction[11] }}</td>
+                        <td class="px-4 py-2">{{ transaction[12] if transaction[12] else 'Non catégorisé' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleViewBtn').addEventListener('click', function() {
+            const tableHead = document.getElementById('tableHead');
+            const rows = tableHead.getElementsByTagName('tr')[0].cells;
+            const isSimplified = this.textContent.includes('Vue Détaillée');
+
+            if (isSimplified) {
+                // Switch to detailed view
+                rows[0].style.display = ''; // ID
+                rows[2].style.display = ''; // Date de valeur
+                rows[4].style.display = ''; // IBAN du partenaire
+                rows[5].style.display = ''; // Type
+                rows[6].style.display = ''; // Référence de paiement
+                rows[7].style.display = ''; // Nom du compte
+                rows[9].style.display = ''; // Montant original
+                rows[10].style.display = ''; // Devise originale
+                rows[11].style.display = ''; // Taux de change
+                this.textContent = 'Vue Simplifiée';
+            } else {
+                // Switch to simplified view
+                rows[0].style.display = 'none'; // ID
+                rows[2].style.display = 'none'; // Date de valeur
+                rows[4].style.display = 'none'; // IBAN du partenaire
+                rows[5].style.display = 'none'; // Type
+                rows[6].style.display = 'none'; // Référence de paiement
+                rows[7].style.display = 'none'; // Nom du compte
+                rows[9].style.display = 'none'; // Montant original
+                rows[10].style.display = 'none'; // Devise originale
+                rows[11].style.display = 'none'; // Taux de change
+                this.textContent = 'Vue Détaillée';
+            }
+
+            // Hide/show corresponding cells in the tbody
+            const tbody = document.querySelector('#transactionsTable tbody');
+            tbody.querySelectorAll('tr').forEach(row => {
+                row.cells[0].style.display = isSimplified ? '' : 'none'; // ID
+                row.cells[2].style.display = isSimplified ? '' : 'none'; // Date de valeur
+                row.cells[4].style.display = isSimplified ? '' : 'none'; // IBAN du partenaire
+                row.cells[5].style.display = isSimplified ? '' : 'none'; // Type
+                row.cells[6].style.display = isSimplified ? '' : 'none'; // Référence de paiement
+                row.cells[7].style.display = isSimplified ? '' : 'none'; // Nom du compte
+                row.cells[9].style.display = isSimplified ? '' : 'none'; // Montant original
+                row.cells[10].style.display = isSimplified ? '' : 'none'; // Devise originale
+                row.cells[11].style.display = isSimplified ? '' : 'none'; // Taux de change
+            });
+        });
+    </script>
+{% endblock %}
